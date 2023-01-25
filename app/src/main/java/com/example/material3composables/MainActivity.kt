@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.material3composables.ui.theme.Material3ComposablesTheme
 import com.jeremykruid.definedcomposables.BaseColumn24
+import com.jeremykruid.definedcomposables.camera.CameraView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BaseColumn24{
-
-                    }
+                    CameraView(onImageCaptured = {uri, b -> }, onError = {})
                 }
             }
         }

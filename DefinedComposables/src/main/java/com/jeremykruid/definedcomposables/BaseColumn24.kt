@@ -8,24 +8,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun BaseColumn24(
-    content: @Composable ()->Unit
+    backgroundColor: Color,
+    padding: Int = 24,
+    content: @Composable ()->Unit,
 ){
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background)
+            .background(color = backgroundColor)
     ){
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp)
-                .background(color = MaterialTheme.colorScheme.background)
+                .padding(padding.dp)
         ){
             content.invoke()
         }
@@ -38,7 +40,8 @@ fun BaseColumn24(
 fun BaseColumn24Prev(){
     MaterialTheme {
         BaseColumn24(
-            content = {Text(text = "some Text")}
+            content = {Text(text = "some Text")},
+            backgroundColor = Color.Black
         )
     }
 }
