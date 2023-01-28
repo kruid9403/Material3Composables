@@ -49,7 +49,6 @@ fun CreditCardTextField(
                 .height(60.dp),
             colors = TextFieldDefaults.textFieldColors(
                 textColor = Color.Black,
-//                backgroundColor = Color.White
             ),
             textStyle = textStyle,
             maxLines = 1,
