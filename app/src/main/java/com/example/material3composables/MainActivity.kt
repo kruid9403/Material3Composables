@@ -9,12 +9,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.material3composables.ui.theme.Material3ComposablesTheme
 import com.jeremykruid.definedcomposables.BaseColumn24
 import com.jeremykruid.definedcomposables.camera.CameraView
+import com.jeremykruid.definedcomposables.textFields.CreditCardTextField
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +34,7 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        CameraView(
-                            context = context,
-                            onImageCaptured = { uri, b -> },
-                            onError = {}
-                        )
+                        CreditCardTextField(card = mutableStateOf("") , textStyle = TextStyle(color = Color.Black))
                     }
                 }
             }
