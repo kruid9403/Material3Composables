@@ -17,7 +17,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.CheckCircle
@@ -28,28 +27,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
+import com.jeremykruid.definedcomposables.R.drawable
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-import com.jeremykruid.definedcomposables.R.drawable
 
 
 @Composable
-fun CameraView(onImageCaptured: (Uri, Boolean) -> Unit, onError: (ImageCaptureException) -> Unit) {
+fun CameraView(
+    context: Context,
+    onImageCaptured: (Uri, Boolean) -> Unit,
+    onError: (ImageCaptureException) -> Unit
+) {
 
-    val context = LocalContext.current
     var lensFacing by remember { mutableStateOf(CameraSelector.LENS_FACING_FRONT) }
     val imageCapture: ImageCapture = remember {
         ImageCapture.Builder().build()
@@ -61,6 +61,7 @@ fun CameraView(onImageCaptured: (Uri, Boolean) -> Unit, onError: (ImageCaptureEx
     }
 
     CameraPreviewView(
+        context,
         imageCapture,
         lensFacing
     ) { cameraUIAction ->
@@ -87,12 +88,12 @@ fun CameraView(onImageCaptured: (Uri, Boolean) -> Unit, onError: (ImageCaptureEx
 @SuppressLint("RestrictedApi")
 @Composable
 fun CameraPreviewView(
+    context: Context,
     imageCapture: ImageCapture,
     lensFacing: Int = CameraSelector.LENS_FACING_FRONT,
     cameraUIAction: (CameraUIAction) -> Unit
 ) {
 
-    val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
     val previewView = remember {
@@ -211,6 +212,7 @@ fun CameraControl(
             painter = painterResource(id = drawable.rotate),
             contentDescription = null,
             modifier = Modifier
+                .size(24.dp, 24.dp)
                 .constrainAs(switch){
                     start.linkTo(photo.end)
                     end.linkTo(parent.end)
