@@ -34,7 +34,9 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        CreditCardTextField(card = mutableStateOf("") , textStyle = TextStyle(color = Color.Black))
+                        CreditCardTextField(
+                            card = mutableStateOf("") ,
+                            textStyle = TextStyle(color = Color.Black))
                     }
                 }
             }

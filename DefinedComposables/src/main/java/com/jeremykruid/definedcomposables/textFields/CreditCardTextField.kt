@@ -21,10 +21,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CreditCardTextField(
     card: MutableState<String>,
-    textStyle: TextStyle
+    textStyle: TextStyle,
+    label: String = "Credit Card Number"
 ){
-
-    val context = LocalContext.current
 
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -37,7 +36,7 @@ fun CreditCardTextField(
                     card.value = it
                 }
             },
-            label = { Text(text = "Credit Card Number") },
+            label = { Text(text = label) },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
