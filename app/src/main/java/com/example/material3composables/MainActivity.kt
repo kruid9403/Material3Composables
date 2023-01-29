@@ -20,6 +20,7 @@ import com.example.material3composables.ui.theme.Material3ComposablesTheme
 import com.jeremykruid.definedcomposables.BaseColumn24
 import com.jeremykruid.definedcomposables.camera.CameraView
 import com.jeremykruid.definedcomposables.textFields.CreditCardTextField
+import com.jeremykruid.definedcomposables.textFields.DollarTextField
 import com.jeremykruid.definedcomposables.textFields.NameTextField
 
 class MainActivity : ComponentActivity() {
@@ -38,6 +39,11 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize()
                     ) {
 //                        CameraView(context = context, onImageCaptured = { uri, b -> }, onError = {})
+                        DollarTextField(
+                            number = remember { mutableStateOf("") },
+                            textStyle = TextStyle(),
+                            colorScheme = MaterialTheme.colorScheme
+                        )
                         NameTextField(
                             name = remember { mutableStateOf("") },
                             label = "First Name",

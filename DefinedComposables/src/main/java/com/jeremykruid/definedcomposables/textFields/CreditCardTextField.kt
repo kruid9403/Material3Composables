@@ -117,18 +117,7 @@ fun formatAmex(text: AnnotatedString): TransformedText {
 //        put - character at 3rd and 9th indicies
         if (i ==3 || i == 9 && i != 14) out += "-"
     }
-//    original - 345678901234564
-//    transformed - 3456-7890123-4564
-//    xxxx-xxxxxx-xxxxx
-    /**
-     * The offset translator should ignore the hyphen characters, so conversion from
-     *  original offset to transformed text works like
-     *  - The 4th char of the original text is 5th char in the transformed text. (i.e original[4th] == transformed[5th]])
-     *  - The 11th char of the original text is 13th char in the transformed text. (i.e original[11th] == transformed[13th])
-     *  Similarly, the reverse conversion works like
-     *  - The 5th char of the transformed text is 4th char in the original text. (i.e  transformed[5th] == original[4th] )
-     *  - The 13th char of the transformed text is 11th char in the original text. (i.e transformed[13th] == original[11th])
-     */
+
     val creditCardOffsetTranslator = object : OffsetMapping {
         override fun originalToTransformed(offset: Int): Int {
             if (offset <= 3) return offset
