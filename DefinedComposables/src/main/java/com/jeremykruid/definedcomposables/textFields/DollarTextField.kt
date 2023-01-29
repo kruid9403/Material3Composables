@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.*
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.substring
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,9 +39,11 @@ fun DollarTextField(
         .height(60.dp)
         .border(width = 1.dp, color = colorScheme.onPrimary, shape = RoundedCornerShape(50))
         .clip(shape = RoundedCornerShape(50)),
-    labelMod: Modifier = Modifier,
+    labelMod: Modifier = Modifier
+        .fillMaxWidth(),
     labelStyle: TextStyle = TextStyle(
-    fontSize = 16.sp,
+        fontSize = 16.sp,
+        textAlign = TextAlign.Center
     ),
     keyboardOptions: KeyboardOptions = KeyboardOptions(
     keyboardType = KeyboardType.Decimal,
@@ -79,14 +82,19 @@ fun DollarTextField(
         colors = textFieldColors,
         textStyle = textStyle,
         maxLines = maxLines,
-//        visualTransformation = VisualTransformation { number ->
-////            when (identifyCardScheme(card.value)) {
-////                CardScheme.AMEX -> formatAmex(number)
-////                CardScheme.DINERS_CLUB -> formatDinnersClub(number)
-////                else -> formatOtherCardNumbers(number)
-////            }
-//            formatDollars(number)
-//        },
+        visualTransformation = VisualTransformation {
+            val s = AnnotatedString("$$it")
+            TransformedText(s, object: OffsetMapping{
+                override fun originalToTransformed(offset: Int): Int {
+                    return offset + 1
+                }
+
+                override fun transformedToOriginal(offset: Int): Int {
+                    return offset
+                }
+
+            })
+        }
     )
 }
 
