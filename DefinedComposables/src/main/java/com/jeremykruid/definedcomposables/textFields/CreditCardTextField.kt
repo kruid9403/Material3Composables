@@ -1,65 +1,81 @@
 package com.jeremykruid.definedcomposables.textFields
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreditCardTextField(
     card: MutableState<String>,
     textStyle: TextStyle,
-    label: String = "Credit Card Number"
+    label: String = "Credit Card Number",
+    colorScheme: ColorScheme,
+    modifier: Modifier = Modifier
+        .padding(horizontal = 32.dp)
+        .padding(top = 4.dp)
+        .fillMaxWidth()
+        .height(60.dp)
+        .border(width = 1.dp, color = colorScheme.onPrimary, shape = RoundedCornerShape(50))
+        .clip(shape = RoundedCornerShape(50)),
+    labelMod: Modifier = Modifier,
+    labelStyle: TextStyle = TextStyle(
+        fontSize = 16.sp,
+    ),
+    keyboardOptions: KeyboardOptions = KeyboardOptions(
+        keyboardType = KeyboardType.Number,
+        imeAction = ImeAction.Next
+    ),
+    keyboardActions: KeyboardActions = KeyboardActions(
+        onNext = {}
+    ),
+    textFieldColors: TextFieldColors = TextFieldDefaults.textFieldColors(
+        textColor = Color.Black,
+    ),
+    maxLines: Int = 1
 ){
 
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ){
+    TextField(
+        value = card.value,
+        onValueChange = {
+            if (it.length <= 16) {
+                card.value = it
+            }
+        },
+        label = { Text(
+            text = label,
+            modifier = labelMod,
+            style = labelStyle
+        ) },
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        modifier = modifier,
+        colors = textFieldColors,
+        textStyle = textStyle,
+        maxLines = maxLines,
+        visualTransformation = VisualTransformation { number ->
+            when (identifyCardScheme(card.value)) {
+                CardScheme.AMEX -> formatAmex(number)
+                CardScheme.DINERS_CLUB -> formatDinnersClub(number)
+                else -> formatOtherCardNumbers(number)
+            }
+        },
+    )
 
-        TextField(
-            value = card.value,
-            onValueChange = {
-                if (it.length <= 16) {
-                    card.value = it
-                }
-            },
-            label = { Text(text = label) },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Next
-            ),
-            modifier = Modifier
-                .padding(horizontal = 32.dp)
-                .padding(top = 4.dp)
-                .fillMaxWidth()
-                .height(60.dp),
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = Color.Black,
-            ),
-            textStyle = textStyle,
-            maxLines = 1,
-            visualTransformation = VisualTransformation { number ->
-                when (identifyCardScheme(card.value)) {
-                    CardScheme.AMEX -> formatAmex(number)
-                    CardScheme.DINERS_CLUB -> formatDinnersClub(number)
-                    else -> formatOtherCardNumbers(number)
-                }
-            },
-        )
-    }
 }
 
 enum class CardScheme {
