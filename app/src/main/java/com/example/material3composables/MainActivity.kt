@@ -1,6 +1,7 @@
 package com.example.material3composables
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.material3composables.ui.theme.Material3ComposablesTheme
 import com.jeremykruid.definedcomposables.BaseColumn24
+import com.jeremykruid.definedcomposables.RoundedButton
 import com.jeremykruid.definedcomposables.camera.CameraView
 import com.jeremykruid.definedcomposables.textFields.CreditCardTextField
 import com.jeremykruid.definedcomposables.textFields.DollarTextField
@@ -39,6 +41,11 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize()
                     ) {
 //                        CameraView(context = context, onImageCaptured = { uri, b -> }, onError = {})
+                        RoundedButton(
+                            text = "Submit"
+                        ) {
+                            Toast.makeText(context, "Toast", Toast.LENGTH_SHORT).show()
+                        }
                         DollarTextField(
                             number = remember { mutableStateOf("") },
                             textStyle = TextStyle(),

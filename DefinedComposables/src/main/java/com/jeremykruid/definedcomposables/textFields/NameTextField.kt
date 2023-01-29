@@ -32,7 +32,6 @@ fun NameTextField(
     label: String = "Credit Card Number",
     colorScheme: ColorScheme,
     modifier: Modifier = Modifier
-        .padding(horizontal = 32.dp)
         .padding(top = 4.dp)
         .fillMaxWidth()
         .height(60.dp)

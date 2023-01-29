@@ -33,7 +33,6 @@ fun DollarTextField(
     label: String = "Price",
     colorScheme: ColorScheme,
     modifier: Modifier = Modifier
-        .padding(horizontal = 32.dp)
         .padding(top = 4.dp)
         .fillMaxWidth()
         .height(60.dp)
