@@ -83,9 +83,26 @@ fun DollarTextField(
         textStyle = textStyle,
         maxLines = maxLines,
         visualTransformation = VisualTransformation {
-            val s = AnnotatedString("$$it")
+            val s = if (it.isNotEmpty()){
+                AnnotatedString(it.text.toDouble().convertDollarsCents())
+            }else{
+                AnnotatedString(0.0.convertDollarsCents())
+            }
+            val split = s.text.split(",").size
             TransformedText(s, object: OffsetMapping{
                 override fun originalToTransformed(offset: Int): Int {
+                    var offset = 0
+                    when(true){
+                        (it.isEmpty())->  {
+                            offset = 0
+                        }
+                        (it.isNotEmpty())->{
+                            offset = it.length + split - 1
+                        }
+                        else->{
+
+                        }
+                    }
                     return offset + 1
                 }
 
