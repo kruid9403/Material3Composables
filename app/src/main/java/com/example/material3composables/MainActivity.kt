@@ -37,8 +37,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize()
+                    BaseColumn24(
+                        backgroundColor = MaterialTheme.colorScheme.background
                     ) {
 //                        CameraView(context = context, onImageCaptured = { uri, b -> }, onError = {})
                         RoundedButton(
