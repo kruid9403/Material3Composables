@@ -26,6 +26,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -47,10 +48,16 @@ import kotlin.coroutines.suspendCoroutine
 fun CameraView(
     context: Context,
     onImageCaptured: (Uri, Boolean) -> Unit,
-    onError: (ImageCaptureException) -> Unit
+    onError: (ImageCaptureException) -> Unit,
+    facingFront: Boolean = true
 ) {
 
-    var lensFacing by remember { mutableStateOf(CameraSelector.LENS_FACING_FRONT) }
+    var lensFacing by remember { mutableStateOf(
+        if (facingFront){
+            CameraSelector.LENS_FACING_FRONT
+        }else{
+            CameraSelector.LENS_FACING_BACK
+        }) }
     val imageCapture: ImageCapture = remember {
         ImageCapture.Builder().build()
     }
@@ -211,6 +218,7 @@ fun CameraControl(
         Image(
             painter = painterResource(id = drawable.rotate),
             contentDescription = null,
+            colorFilter = ColorFilter.tint(Color.White),
             modifier = Modifier
                 .size(24.dp, 24.dp)
                 .constrainAs(switch){
