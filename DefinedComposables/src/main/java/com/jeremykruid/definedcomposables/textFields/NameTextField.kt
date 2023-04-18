@@ -1,5 +1,6 @@
 package com.jeremykruid.definedcomposables.textFields
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,15 +36,16 @@ fun NameTextField(
         .padding(top = 4.dp)
         .fillMaxWidth()
         .height(60.dp)
-        .border(width = 1.dp, color = colorScheme.onPrimary, shape = RoundedCornerShape(50))
+        .border(width = 1.dp, color = colorScheme.onBackground, shape = RoundedCornerShape(50))
         .clip(shape = RoundedCornerShape(50)),
     labelMod: Modifier = Modifier,
     labelStyle: TextStyle = TextStyle(
         fontSize = 16.sp,
     ),
     keyboardOptions: KeyboardOptions = KeyboardOptions(
-        keyboardType = KeyboardType.Number,
-        imeAction = ImeAction.Next
+        keyboardType = KeyboardType.Text,
+        imeAction = ImeAction.Next,
+        capitalization = KeyboardCapitalization.Words
     ),
     keyboardActions: KeyboardActions = KeyboardActions(
         onNext = {}

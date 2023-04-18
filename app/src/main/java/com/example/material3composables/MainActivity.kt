@@ -37,44 +37,38 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CameraView(
-                        context = context,
-                        onImageCaptured = {u,i->},
-                        onError = {},
-                        facingFront = true
-                    )
-//                    Column(
-//                        modifier = Modifier.fillMaxSize()
-//                    ) {
-////                        CameraView(context = context, onImageCaptured = { uri, b -> }, onError = {})
-//                        RoundedButton(
-//                            text = "Submit"
-//                        ) {
-//                            Toast.makeText(context, "Toast", Toast.LENGTH_SHORT).show()
-//                        }
-//                        DollarTextField(
-//                            number = remember { mutableStateOf("") },
-//                            textStyle = TextStyle(),
-//                            colorScheme = MaterialTheme.colorScheme
-//                        )
-//                        NameTextField(
-//                            name = remember { mutableStateOf("") },
-//                            label = "First Name",
-//                            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary),
-//                            colorScheme = MaterialTheme.colorScheme
-//                        )
-//
-//                        CreditCardTextField(
-//                            card = remember { mutableStateOf("") },
-//                            textStyle = TextStyle(),
-//                            colorScheme  = MaterialTheme.colorScheme,
-//                            textFieldColors = TextFieldDefaults.textFieldColors(
-//                                textColor = MaterialTheme.colorScheme.primary,
-//                                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-//                                unfocusedLabelColor = MaterialTheme.colorScheme.primary
-//                            )
-//                        )
-//                    }
+                    BaseColumn24(
+                        backgroundColor = MaterialTheme.colorScheme.background
+                    ) {
+//                        CameraView(context = context, onImageCaptured = { uri, b -> }, onError = {})
+                        RoundedButton(
+                            text = "Submit"
+                        ) {
+                            Toast.makeText(context, "Toast", Toast.LENGTH_SHORT).show()
+                        }
+                        DollarTextField(
+                            number = remember { mutableStateOf("") },
+                            textStyle = TextStyle(),
+                            colorScheme = MaterialTheme.colorScheme
+                        )
+                        NameTextField(
+                            name = remember { mutableStateOf("") },
+                            label = "First Name",
+                            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary),
+                            colorScheme = MaterialTheme.colorScheme
+                        )
+
+                        CreditCardTextField(
+                            card = remember { mutableStateOf("") },
+                            textStyle = TextStyle(),
+                            colorScheme  = MaterialTheme.colorScheme,
+                            textFieldColors = TextFieldDefaults.textFieldColors(
+                                textColor = MaterialTheme.colorScheme.primary,
+                                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                                unfocusedLabelColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
                 }
             }
         }
